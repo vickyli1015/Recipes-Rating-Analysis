@@ -1,12 +1,10 @@
-# Recipes-Rating-Analysis
-
 By Vicky Li (<yil164@ucsd.edu>)
 
 ## Introduction
 
 ### Question of Focus
 
-Many people naturally assume that a rating for a recipe represents how good the food **really** tastes. However, will the ratings be influenced by other factors, for example, the number of steps that are involved in the process? This project aims to explore whether or not there is a relationship, and what is the relationship, between **the number of steps in each recipe ** and **their average ratings**.
+Many people naturally assume that a rating for a recipe represents how good the food **really** tastes. However, will the ratings be influenced by other factors, for example, the number of steps that are involved in the process? This project aims to explore whether or not there is a relationship, and what is the relationship, between **the number of steps in each recipe** and **their average ratings**.
 
 ### Dataset
 
