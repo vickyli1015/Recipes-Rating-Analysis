@@ -1,4 +1,6 @@
-# Recipes-Rating-Analysis
+# Recipe Steps VS Taste Triumph: 
+
+## Investigating the Influence of Number of Steps on Average Ratings
 
 By Vicky Li (<yil164@ucsd.edu>)
 
