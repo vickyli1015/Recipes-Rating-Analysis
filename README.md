@@ -1,4 +1,19 @@
 # Recipes-Rating-Analysis
-This is a project done in course DSC80 @ UCSD
 
-Testing Push Functionality
+By Vicky Li (<yil164@ucsd.edu>)
+
+#### Introduction
+
+##### Question of Focus
+
+Many people naturally assume that a rating for a recipe represents how good the food **really** tastes. However, will the ratings be influenced by other factors, for example, the number of steps that are involved in the process? This project aims to explore whether or not there is a relationship, and what is the relationship, between **the number of steps in each recipe ** and **their average ratings**.
+
+##### Dataset
+
+I will use a dataset named *recipes* to explore the relationship. The dataset contains 83782 recipes and 13 columns that each contains some infomation about each recipe. Our question is relevant to columns: "*n_steps*" and "*average_rating*". "*n_steps*" represents the number of steps that are shown in a recipe, and "*average_rating*" represents the average ratings for a recipe if there exists any ratings.
+
+#### Cleaning and EDA
+
+##### Data Cleaning
+
+For the column "*n_steps*", it is stored as an integer series, but
