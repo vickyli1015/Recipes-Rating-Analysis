@@ -61,7 +61,7 @@ Most recipes have average ratings >= 4, making the distribution of average ratin
 Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows **how rare it is for a rating to be in this already wide range.**
 
----
+___
 
 
 ### Bivariate Analysis
@@ -73,7 +73,7 @@ The lower 25% of ratings are found in [1, 4.5], which shows **how rare it is for
 - Despite that there are more data points that fall into higher ranges of average ratings while some ranges have only a few data points, the **outlier thresholds for number of steps are similar** (around 21 steps). In fact, the more data points there are within a range, the more similar the threshold will be throughout various ranges
     * Similarly, the **middle 50%** data points are consistent throughout ranges of average ratings that have many data points.
 
----
+___
 
 ### Interesting Aggregates
 
@@ -109,13 +109,13 @@ The dataframe below shows aggregated statistics between average rating of a reci
 ### NMAR Analysis
 
 Refer back the cleaned *Recipes* Dataset, there is a possibility that the column "*average_rating*" is not missing at random (NMAR). Why? Think about the following scenarios:
-1. Notice that *Interactions* dataset has one row for each rating and/or comment. Imagine that you have questions regarding a recipe, do you choose to rate on it or comment on it to ask?
+1. Notice that *Interactions* dataset has one row for each rating and/or comment. Imagine that you have questions regarding a recipe, do you **choose** to rate on the recipe or comment on it to clarify?
 2. Imagine that you are a user that just **do** something instead of **disclosing opinions about** it, would you rate a recipe on a regular basis, especially when you are making food every single day?
 3. For every bad recipe you've seen, will you rate on each of them or are you more inclined to just forget about it after you eat it?
 
 Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, users choosing not to show their opinion, being kind, or even just that they're too lazy to rate**, they may contribute to the missiness of "*average_rating*". Therefore, it can be NMAR. However, we can obtain data like users' review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR, since they all determine whether a rating will be missing to some extent!
 
----
+___
 
 
 ### Missingness Dependency
@@ -152,7 +152,7 @@ Since the p-value < 0.01 , we **reject** the null hypothesis that the distributi
 
 *Note*: This is intuitive when you think about the personality of different recipe contributors. Some may LOVE giving detailed descriptions while some may be so straight forward that they believe that the descriptions in *steps* or recipe *name* is sufficient.
 
----
+___
 
 ## Hypothesis Testing
 
