@@ -39,7 +39,7 @@ Cleaned Recipes Dataset:
 | millionaire pound cake               | 286009 |       120 |           461724 | 2008-02-12  | ['time-to-make', 'course', 'cuisine', 'preparation... | [878.3, 63.0, 326.0, 13.0, 20.0, 123.0, 39.0] |         7 | ['freheat the oven to 300 degrees', 'grease a 10-i... | why a millionaire pound cake?  because it's super ... | ['butter', 'sugar', 'eggs', 'all-purpose flour', '... |               7 |                5 |
 | 2000 meatloaf                        | 475785 |        90 |          2202916 | 2012-03-06  | ['time-to-make', 'course', 'main-ingredient', 'pre... | [267.0, 30.0, 12.0, 12.0, 29.0, 48.0, 2.0]    |        17 | ['pan fry bacon , and set aside on a paper towel t... | ready, set, cook! special edition contest entry: a... | ['meatloaf mixture', 'unsmoked bacon', 'goat chees... |              13 |                5 |
 
-___
+
 
 ### Univariate Analysis
 
@@ -60,7 +60,6 @@ Most recipes have average ratings >= 4, making the distribution of average ratin
 Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows **how rare it is for a rating to be in this already wide range.**
 
-___
 
 ### Bivariate Analysis
 
@@ -71,7 +70,6 @@ ___
 - Despite that there are more data points that fall into higher ranges of average ratings while some ranges have only a few data points, the **outlier thresholds for number of steps are similar** (around 21 steps). In fact, the more data points there are within a range, the more similar the threshold will be throughout various ranges
     * Similarly, the **middle 50%** data points are consistent throughout ranges of average ratings that have many data points.
 
-___
 
 ### Interesting Aggregates
 
@@ -113,7 +111,6 @@ Refer back the cleaned *Recipes* Dataset, there is a possibility that the column
 
 Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, users choosing not to show their opinion, being kind, or even just that they're too lazy to rate**, they may contribute to the missiness of "*average_rating*". Therefore, it can be NMAR. However, we can obtain data like users' review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR, since they all determine whether a rating will be missing to some extent!
 
-___
 
 ### Missingness Dependency
 #### Target Missing Column: 'description'
@@ -125,38 +122,38 @@ So we test whether it is MAR or MCAR below:
 
 #### Test whether missingness of 'description' depends on the column: 'minutes':
 
-Null Hypothesis: distribution of *minutes* is the same for recipes that have missing descriptions and recipes that do not.
+**Null Hypothesis**: distribution of *minutes* is the same for recipes that have missing descriptions and recipes that do not.
 
-Alternative Hypothesis: The distribution is not the same.
+**Alternative Hypothesis**: The distribution is not the same.
 
 <iframe src="assets/minutes_description.html" width=1000 height=600 frameBorder=0></iframe>
 
-Since the p-value > 0.05 by a lot, we **fail to reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *average rating* and recipes that do not at 5% significance level. Therefore we say that **the column *description* is NOT MAR depending on *minutes***.
+Since the p-value > 0.05 by a lot, we **fail to reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *average rating* and recipes that do not at 5% significance level. Therefore, we say that **the column *description* is NOT MAR depending on *minutes***.
 
 *Note*: If you stuck on here, think about the goal of giving an description: focus on the qualities or characteristics of the dishes, such as the flavors or healthiness, and why is it very **unlikely** for it be related to time spent on making it.
-   * *Note-Note*: Because regardless of how much time a dish spends, it ALWAYS has some characteristics that one may want to share. Fast-making food can be delicious that the contributor may want to describe, and delicate food can also be delicious!
+   * *Just in case you don't know:*: Regardless of how much time a dish spends, it ALWAYS has some characteristics that one may want to share. Fast-making food can be delicious that the contributor may want to describe, and delicate food can also be delicious!
 
 
 #### Test whether missingness of 'description' depends on the column: 'contributor_id':
 
-Null Hypothesis: distribution of *contributor_id* is the same for recipes that have missing descriptions and recipes that do not.
+**Null Hypothesis**: distribution of *contributor_id* is the same for recipes that have missing descriptions and recipes that do not.
 
-Alternative Hypothesis: The distribution is not the same.
+**Alternative Hypothesis**: The distribution is not the same.
 
 <iframe src="assets/contributor_description.html" width=1000 height=600 frameBorder=0></iframe>
 
 Since the p-value < 0.01 , we **reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *descriptions* and recipes that do not at 1% significance level. Therefore we say that **the column *description* is MAR depending on *contributor id***.
 
-*Note*: This is intuitive when you think about the personality of different recipe contributors. Some may LOVE giving detailed descriptions while some may be so straight forward that they believe that the descriptions in *steps* or recipe *name* is sufficient.
+*Note*: This is intuitive when you think about the **personality** of different recipe contributors. Some may LOVE giving detailed descriptions while some may be so straight forward that they believe that the descriptions in *steps* or recipe *name* are already sufficient that they don't need any extra add-ons.
 
-___
+
 
 ## Hypothesis Testing
 
 Recall the Question of Interest: **whether or not there is a relationship, and what is the relationship, between the number of steps in recipes and their average ratings?** That is, from a broader sense, is it possible that the average ratings for recipes does not only depend on how the food tastes?
 
 #### small exploration
-It appears that the recipes with middle/high ranges of number of steps often (not always though) tend to have slightly higher average rating than the recipes that have lower ranges of number of steps.
+It appears that the recipes with middle/high ranges of number of steps often (not always though) tend to have **slightly higher average rating** than the recipes that have lower ranges of number of steps.
 
 <iframe src="assets/stepsx_mean_ratingsy.html" width=1000 height=600 frameBorder=0></iframe>>
 
@@ -169,10 +166,10 @@ It appears that the recipes with middle/high ranges of number of steps often (no
 #### Plan:
 Repeatably sample 20 recipes 100000 times from the population and compute their **mean of average ratings**, and see where the observed mean lies in this empirical distribution.
 
-Test Statistic: Means of average ratings
-This statistic is good because it is  
+**Test statistic**: Means of average ratings
+This statistic is ready to use naturally because our observed statistic is a mean of average ratings, but just in a smaller subset of group. 
 
-Significance level: 5%
+**Significance level**: 5%
 5% is strong enough compared to 10% to minimize the rate of rejecting a null hypothesis when it is true, while also allowing for reasonable sensitivity to detect meaningful/necessary relationships compared to 1%. It balances between the 2 other options.
 
 <iframe src="assets/hypo_test.html" width=1000 height=600 frameBorder=0></iframe>>
