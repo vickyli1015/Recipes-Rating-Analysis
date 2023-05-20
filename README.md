@@ -1,4 +1,3 @@
-# Recipe Steps VS Taste Triumph: 
 
 ## Investigating the Influence of Number of Steps on Average Ratings
 
@@ -54,7 +53,7 @@ Notice that the median of number of steps is 9, but the mean is 10. This means t
 
 Most recipes have average ratings >= 4, making the distribution heavily negatively skewed.
 
-<iframe src="assets/rating_distribution2.html" width=1000 height=600 frameBorder=0></iframe>
+<iframe src="assets/rating_distribution_box.html" width=1000 height=600 frameBorder=0></iframe>
 
 Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows how rare it is for a rating to be in this already wide range
@@ -63,7 +62,7 @@ The lower 25% of ratings are found in [1, 4.5], which shows how rare it is for a
 
 ### Bivariate Analysis
 
-<iframe src="assets/bi_distribution.html" width=1000 height=600 frameBorder=0></iframe>
+<iframe src="assets/bi_distribution_box.html" width=1000 height=600 frameBorder=0></iframe>
 
 A few things to emphasize:
 - The distribution is positively skewed for most of the range of average ratings (if not all)
