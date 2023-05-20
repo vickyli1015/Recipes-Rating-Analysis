@@ -12,7 +12,7 @@ Many people naturally assume that a rating for a recipe represents how good the 
 
 ### Dataset
 
-I will use a dataset named *recipes* to explore the relationship. The dataset contains 83782 recipes and 13 columns that each contains some infomation about each recipe. Our question is relevant to columns: "*n_steps*" and "*average_rating*". "*n_steps*" represents the number of steps that are shown in a recipe, and "*average_rating*" represents the average ratings for a recipe if there exists any ratings.
+I will use a dataset named *recipes* to explore the relationship. The dataset contains 83782 recipes and 13 columns that each contains some infomation about each recipe. The dataset is formed by merging the original *Recipes* dataset with the averaged **rating** column of the *interactions* dataset, in which there is one row for each interaction (rating and/or commenting). Our question is relevant to columns: "*n_steps*" and "*average_rating*". "*n_steps*" represents the number of steps that are shown in a recipe, and "*average_rating*" represents the average ratings for a recipe if there exists any ratings.
 
 ## Cleaning and EDA
 
@@ -95,3 +95,16 @@ The dataframe below shows aggregated statistics between average rating of a reci
 - It appears that there is no obvious trend between ratings and  **the mean and median of number of steps**. However, there is an obvious trend that most of the recipes are associated with a high average rating. It also implies that recipes that have high ratings may be our focus of interest. 
 
 
+## Assessment of Missingness
+
+### NMAR Analysis
+
+Refer back the cleaned *Recipes* Dataset, there is a possibility that the column "*Average_Rating*" is not missing at random (NMAR). 
+Think about the following scenarios:
+1. Notice that *interactions* dataset has one row for each rating and/or comment. Imagine that you have questions regarding a recipe, do you choose to rate on it or comment on it to ask?
+2. Imagine that you are a user that just **do** something instead of **disclosing opinions about** it, would you rate a recipe on a regular basis, especially when you are making food every single day?
+3. For every bad recipe you've seen, will you rate on each of them or are you more inclined to just forget about it after you eat it?
+
+Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, or users choosing not to show their opinion or just being kind, or even just they're too lazy to rate**, they may contribute to the missiness of "*Average_Rating*". Therefore, I think it can be NMAR. However, we can obtain data like their review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR.
+
+### Missingness Dependency
