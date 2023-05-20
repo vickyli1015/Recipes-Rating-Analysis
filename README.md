@@ -20,4 +20,12 @@ I will use a dataset named *recipes* to explore the relationship. The dataset co
 
 - Column "*n_steps*": it has been stored as an integer type already in the dataset, and there are no missing values/values that are used to impute missing values. As a result, this column is ready to be utilized efficiently without causing any bias due to missingness!
 
-- Column "*average_rating*": Before calculating the average of rating, we 
+- Column "*average_rating*": Before calculating the average of rating, we identified an *individual* rating of 0 as a missing value since the minimum value for rating is 1 (1 star), so a 0 means that a user does not rate the recipe. Therefore, before we calculated the *average* rating, we replace all 0s with Null so that they don't contribute to the average rating of a recipe.
+    * Without this cleaning step, the average rating will be biased low.
+
+Cleaned *Recipes* Dataset:
+
+``` py
+clean_recipes = pd.read_csv('/Users/vickyli/Dropbox/My Mac (Vicky的MacBook Air)/Desktop/Recipes-Rating-Analysis/cleaned_recipes')
+print(clean_recipes.head().to_markdown(index=False))
+```
