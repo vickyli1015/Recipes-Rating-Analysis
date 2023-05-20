@@ -41,6 +41,6 @@ print(clean_recipes.head().to_markdown(index=False))
 
 ### Univariate Analysis
 
-<iframe src="/Users/vickyli/Dropbox/My Mac (Vicky的MacBook Air)/Desktop/dsc80-2023-sp/projects/03-topics/Recipes-Rating-Analysis/assets/step_distribution_box.html" width=800 height=600 frameBorder=0></iframe>
+<iframe src="assets/step_distribution_box.html" width=800 height=600 frameBorder=0></iframe>
 
 fssfd
