@@ -1,5 +1,3 @@
-## Investigating the Influence of Number of Steps on Average Ratings
-
 By Vicky Li (<yil164@ucsd.edu>)
 
 ## Introduction
@@ -41,6 +39,7 @@ Cleaned Recipes Dataset:
 | millionaire pound cake               | 286009 |       120 |           461724 | 2008-02-12  | ['time-to-make', 'course', 'cuisine', 'preparation... | [878.3, 63.0, 326.0, 13.0, 20.0, 123.0, 39.0] |         7 | ['freheat the oven to 300 degrees', 'grease a 10-i... | why a millionaire pound cake?  because it's super ... | ['butter', 'sugar', 'eggs', 'all-purpose flour', '... |               7 |                5 |
 | 2000 meatloaf                        | 475785 |        90 |          2202916 | 2012-03-06  | ['time-to-make', 'course', 'main-ingredient', 'pre... | [267.0, 30.0, 12.0, 12.0, 29.0, 48.0, 2.0]    |        17 | ['pan fry bacon , and set aside on a paper towel t... | ready, set, cook! special edition contest entry: a... | ['meatloaf mixture', 'unsmoked bacon', 'goat chees... |              13 |                5 |
 
+___
 
 ### Univariate Analysis
 
@@ -62,7 +61,6 @@ Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows **how rare it is for a rating to be in this already wide range.**
 
 ___
-
 
 ### Bivariate Analysis
 
@@ -116,7 +114,6 @@ Refer back the cleaned *Recipes* Dataset, there is a possibility that the column
 Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, users choosing not to show their opinion, being kind, or even just that they're too lazy to rate**, they may contribute to the missiness of "*average_rating*". Therefore, it can be NMAR. However, we can obtain data like users' review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR, since they all determine whether a rating will be missing to some extent!
 
 ___
-
 
 ### Missingness Dependency
 #### Target Missing Column: 'description'
