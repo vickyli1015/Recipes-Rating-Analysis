@@ -153,21 +153,30 @@ Since the p-value < 0.01 , we **reject** the null hypothesis that the distributi
 
 ## Hypothesis Testing
 
-Question of Interest: **whether or not there is a relationship, and what is the relationship, between the number of steps in recipes and their average ratings**, that is, from a broader sense, is it possible that the average ratings for recipes does not only depend on how the food tastes.
+Recall the Question of Interest: **whether or not there is a relationship, and what is the relationship, between the number of steps in recipes and their average ratings?** That is, from a broader sense, is it possible that the average ratings for recipes does not only depend on how the food tastes?
 
-**Null Hypothesis**: The number of steps in a recipe is **not related** to its average rating. i.e., the differences in means of average ratings we observe above are **due to chance only**
-- For example, given that there are 20 recipes that fall into [60, 70.3) (since this range has relatively larger sample size, I am going to use this as an example), and they have a mean of average ratings of around 4.80, if we pick 20 recipes from the whole population (dataset), it is reasonable to see a mean this high.
+#### small exploration
+It appears that the recipes with middle/high ranges of number of steps often (not always though) tend to have slightly higher average rating than the recipes that have lower ranges of number of steps.
+
+<iframe src="assets/stepsx_mean_ratingsy.html" width=1000 height=600 frameBorder=0></iframe>>
+
+**Null Hypothesis**: The number of steps in a recipe is **not related** to its average rating. i.e., the differences in means of average ratings we observe above are **due to chance only**.
+- For example, given that there are 20 recipes that fall into [60, 70.3), and they have a mean of average ratings of around 4.80 (since this range has relatively larger counts, I am going to use this as an example we test on), if we pick 20 recipes from the **whole population**, it is reasonable to see a mean this high.
 
 **Alternative Hypothesis**: The number of steps in a recipe **is related** to its average rating.
+- In other words, the randomly chosen 20 recipes are very unlikely to have a mean this high if they are not related.
 
 #### Plan:
-Repeatably sample 20 recipes from the population and compute their **mean of average ratings**, and see what the observed mean lie in this empirical distribution.
+Repeatably sample 20 recipes 100000 times from the population and compute their **mean of average ratings**, and see where the observed mean lies in this empirical distribution.
 
-Test Statistic: Means of average ratings 
+Test Statistic: Means of average ratings
+This statistic is good because it is  
 
-Significance level: 5%, since 5% is strong enough to minimize the rate of rejecting a null hypothesis when it is true compared to 10%, while also allowing for reasonable sensitivity to detect meaningful/necessary relationships compared to 1%. It balances between the 2 other options.
+Significance level: 5%
+5% is strong enough compared to 10% to minimize the rate of rejecting a null hypothesis when it is true, while also allowing for reasonable sensitivity to detect meaningful/necessary relationships compared to 1%. It balances between the 2 other options.
 
-some data
+<iframe src="assets/hypo_test.html" width=1000 height=600 frameBorder=0></iframe>>
+As you can see, the observed mean (4.80) is almost sitting at the margin of the histogram! That means ...  
 
 #### Conclusion:
 The chance that the observed mean of average ratings came from the distribution of mean under the null is less than 5%.
