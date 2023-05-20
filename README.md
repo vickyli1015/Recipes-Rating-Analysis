@@ -173,6 +173,7 @@ This statistic is ready to use naturally because our observed statistic is a mea
 5% is strong enough compared to 10% to minimize the rate of rejecting a null hypothesis when it is true, while also allowing for reasonable sensitivity to detect meaningful/necessary relationships compared to 1%. It balances between the 2 other options.
 
 <iframe src="assets/hypo_test.html" width=1000 height=600 frameBorder=0></iframe>>
+
 As you can see, the observed mean (4.80) is almost sitting at the margin of the histogram! That means ...  
 
 ### Conclusion:
