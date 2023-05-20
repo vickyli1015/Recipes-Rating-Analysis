@@ -27,9 +27,6 @@ Cleaned *Recipes* Dataset:
 
 Note that there is a column named "steps" are being ignored for readability purpose. It contains detailed strings of descriptions of every step in a recipe.
 
-``` py
-print(clean_recipes.head().to_markdown(index=False))
-```
 
 | name                                 |     id |   minutes |   contributor_id | submitted   | tags                                                                                                                                                                                                                                                                                               | nutrition                                     |   n_steps | description                                                                                                                                                                                                                                                                                                                                                                       | ingredients                                                                                                                                                                                                                             |   n_ingredients |   average_rating |
 |:-------------------------------------|-------:|----------:|-----------------:|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------|----------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------:|-----------------:|
@@ -41,6 +38,60 @@ print(clean_recipes.head().to_markdown(index=False))
 
 ### Univariate Analysis
 
-<iframe src="assets/step_distribution_box.html" width=800 height=600 frameBorder=0></iframe>
+##### Distribution of Number of Steps:
+<iframe src="assets/step_distribution.html" width=1000 height=600 frameBorder=0></iframe>
 
-fssfd
+As shown, most of the recipes have number of steps <= 20, with the mode being 7. There are indeed some recipes that has above 20 steps, but it is not very likely. Notice that when you browse over [Food.com](https://www.food.com/), you will notice that some recipes, especially the ones with many steps, contains **unnecessary steps** such as, "[Take a deep breath. Make sure that you will have several uninterrupted hours to cook...](https://www.food.com/recipe/death-by-chocolate-a-la-trellis-356724)". Therefore, we need to be aware that the number of steps collected may not be reflective of what the real steps that are required.
+
+<iframe src="assets/step_distribution_box.html" width=1000 height=600 frameBorder=0></iframe>
+
+Notice that the median of number of steps is 9, but the mean is 10. This means the number of steps is biased high to some extent. One possible reason can be the one we walked about above -- necessary steps! However, despite this potential phenomenon, most of the recipes have less steps and any recipe that has > 23 steps is considered to be an outlier.
+
+##### Distribution of Average Ratings
+<iframe src="assets/rating_distribution.html" width=1000 height=600 frameBorder=0></iframe>
+
+Most recipes have average ratings >= 4, making the distribution heavily negatively skewed.
+
+<iframe src="assets/rating_distribution2.html" width=1000 height=600 frameBorder=0></iframe>
+
+Any rating under 3.75 is considered to be an outlier.
+The lower 25% of ratings are found in [1, 4.5], which shows how rare it is for a rating to be in this already wide range
+
+### Bivariate Analysis
+
+<iframe src="assets/bi_distribution.html" width=1000 height=600 frameBorder=0></iframe>
+
+A few things to emphasize:
+- The distribution is positively skewed for most of the range of average ratings (if not all)
+- Despite that there are more data points that fall into higher ranges of average ratings, the outlier thresholds for number of steps are similar (around 21 steps). In fact, the more data points, the more consistent the threshold will be throughout various ranges
+    * Similarly, the middle 50% data points are consistent throughout ranges of average ratings that have many data points
+
+### Interesting Aggregates
+
+The dataframe below shows aggregated statistics between average rating of a recipe and the steps it takes. Since average rating is continuous, I group them into several ranges for better analysis.
+
+| Average Rating Range   |     mean |   median |       std |   count |
+|:-----------------------|---------:|---------:|----------:|--------:|
+| [1, 1.25)              | 10.489   |        9 |   6.19485 |     589 |
+| [1.25, 1.5)            | 11       |       11 | nan       |       1 |
+| [1.5, 1.75)            | 11.3889  |       10 |   8.73895 |      18 |
+| [1.75, 2.0)            |  5       |        5 |   1.41421 |       2 |
+| [2.0, 2.25)            | 10.7758  |       10 |   6.5605  |     620 |
+| [2.25, 2.5)            | 10.1     |        8 |   6.62452 |      20 |
+| [2.5, 2.75)            | 10.0952  |        9 |   6.20244 |     147 |
+| [2.75, 3.0)            |  7.07692 |        6 |   4.07148 |      13 |
+| [3.0, 3.25)            |  9.98221 |        9 |   6.26911 |    2530 |
+| [3.25, 3.5)            |  9.51351 |        8 |   5.0874  |     185 |
+| [3.5, 3.75)            | 10.1984  |        9 |   6.28899 |    1008 |
+| [3.75, 4.0)            | 10.3963  |       10 |   6.17714 |     217 |
+| [4.0, 4.25)            |  9.98307 |        9 |   5.97365 |   12640 |
+| [4.25, 4.5)            |  9.54066 |        8 |   5.88854 |    2238 |
+| [4.5, 4.75)            |  9.70374 |        9 |   5.80111 |    8604 |
+| [4.75, 5.0)            |  9.32083 |        8 |   5.69882 |    4557 |
+| 5                      | 10.2251  |        9 |   6.59071 |   47784 |
+
+##### Discovery: 
+- In ranges where many data points (recipes) fall in, the std tends to be smaller and is more consistent across different ranges.
+- It appears that there is no obvious trend between ratings and  **the mean and median of number of steps**. However, there is an obvious trend that most of the recipes are associated with a high average rating. It also implies that recipes that have high ratings may be our focus of interest. 
+
+
