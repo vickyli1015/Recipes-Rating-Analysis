@@ -36,6 +36,8 @@ Note that there is a column named "steps" are being ignored for readability purp
 | millionaire pound cake               | 286009 |       120 |           461724 | 2008-02-12  | ['time-to-make', 'course', 'cuisine', 'preparation', 'occasion', 'north-american', 'desserts', 'american', 'southern-united-states', 'dinner-party', 'holiday-event', 'cakes', 'dietary', 'christmas', 'thanksgiving', 'low-sodium', 'low-in-something', 'taste-mood', 'sweet', '4-hours-or-less'] | [878.3, 63.0, 326.0, 13.0, 20.0, 123.0, 39.0] |         7 | why a millionaire pound cake?  because it's super rich!  this scrumptious cake is the pride of an elderly belle from jackson, mississippi.  the recipe comes from "the glory of southern cooking" by james villas.                                                                                                                                                                | ['butter', 'sugar', 'eggs', 'all-purpose flour', 'whole milk', 'pure vanilla extract', 'almond extract']                                                                                                                                |               7 |                5 |
 | 2000 meatloaf                        | 475785 |        90 |          2202916 | 2012-03-06  | ['time-to-make', 'course', 'main-ingredient', 'preparation', 'main-dish', 'potatoes', 'vegetables', '4-hours-or-less', 'meatloaf', 'simply-potatoes2']                                                                                                                                             | [267.0, 30.0, 12.0, 12.0, 29.0, 48.0, 2.0]    |        17 | ready, set, cook! special edition contest entry: a mediterranean flavor inspired meatloaf dish. featuring: simply potatoes - shredded hash browns, egg, bacon, spinach, red bell pepper, and goat cheese.                                                                                                                                                                         | ['meatloaf mixture', 'unsmoked bacon', 'goat cheese', 'unsalted butter', 'eggs', 'baby spinach', 'yellow onion', 'red bell pepper', 'simply potatoes shredded hash browns', 'fresh garlic', 'kosher salt', 'white pepper', 'olive oil'] |              13 |                5 |
 
+---
+
 ### Univariate Analysis
 
 ##### Distribution of Number of Steps:
@@ -57,6 +59,8 @@ Most recipes have average ratings >= 4, making the distribution heavily negative
 Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows how rare it is for a rating to be in this already wide range
 
+---
+
 ### Bivariate Analysis
 
 <iframe src="assets/bi_distribution.html" width=1000 height=600 frameBorder=0></iframe>
@@ -65,6 +69,8 @@ A few things to emphasize:
 - The distribution is positively skewed for most of the range of average ratings (if not all)
 - Despite that there are more data points that fall into higher ranges of average ratings, the outlier thresholds for number of steps are similar (around 21 steps). In fact, the more data points, the more consistent the threshold will be throughout various ranges
     * Similarly, the middle 50% data points are consistent throughout ranges of average ratings that have many data points
+
+---
 
 ### Interesting Aggregates
 
@@ -107,4 +113,62 @@ Think about the following scenarios:
 
 Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, or users choosing not to show their opinion or just being kind, or even just they're too lazy to rate**, they may contribute to the missiness of "*Average_Rating*". Therefore, I think it can be NMAR. However, we can obtain data like their review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR.
 
+---
+
 ### Missingness Dependency
+#### Target Missing Column: 'description'
+
+1. It is not missing by design (MD) because other columns do not provide any information sufficient enough for a recipe to miss detailed descriptions.
+2. It is not MNAR because as we will see, its missingness will depend on other column.
+
+So we test whether it is MAR or MCAR below:
+
+
+##### Test whether missingness of 'description' depends on the column: 'minutes':
+
+Null Hypothesis: distribution of *minutes* is the same for recipes that have missing descriptions and recipes that do not.
+
+Alternative Hypothesis: The distribution is not the same.
+
+<iframe src="assets/minutes_description.html" width=1000 height=600 frameBorder=0></iframe>
+
+Since the p-value > 0.05 by a lot, we **fail to reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *average rating* and recipes that do not at 5% significance level. Therefore we say that **the column *description* is NOT MAR depending on *minutes***.
+
+*Note*: If you stuck on here, think about the goal of giving an description: focus on the qualities or characteristics of the dishes, such as the flavors or healthiness, and why is it very **unlikely** for it be related to time spent on making it.
+   * *Note-Note*: Because regardless of how much time a dish spends, it ALWAYS has some characteristics that one may want to share. Fast-making food can be delicious that the contributor may want to describe, and delicate food can also be delicious!
+
+
+##### Test whether missingness of 'description' depends on the column: 'contributor_id':
+
+Null Hypothesis: distribution of *contributor_id* is the same for recipes that have missing descriptions and recipes that do not.
+
+Alternative Hypothesis: The distribution is not the same.
+
+<iframe src="assets/contributor_description.html" width=1000 height=600 frameBorder=0></iframe>
+
+Since the p-value < 0.01 , we **reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *descriptions* and recipes that do not at 1% significance level. Therefore we say that **the column *description* is MAR depending on *contributor id***.
+
+*Note*: This is intuitive when you think about the personality of different recipe contributors. Some may LOVE giving detailed descriptions while some may be so straight forward that they believe that the descriptions in *steps* or recipe *name* is sufficient.
+
+
+## Hypothesis Testing
+
+Question of Interest: **whether or not there is a relationship, and what is the relationship, between the number of steps in recipes and their average ratings**, that is, from a broader sense, is it possible that the average ratings for recipes does not only depend on how the food tastes.
+
+**Null Hypothesis**: The number of steps in a recipe is **not related** to its average rating. i.e., the differences in means of average ratings we observe above are **due to chance only**
+- For example, given that there are 20 recipes that fall into [60, 70.3) (since this range has relatively larger sample size, I am going to use this as an example), and they have a mean of average ratings of around 4.80, if we pick 20 recipes from the whole population (dataset), it is reasonable to see a mean this high.
+
+**Alternative Hypothesis**: The number of steps in a recipe **is related** to its average rating.
+
+#### Plan:
+Repeatably sample 20 recipes from the population and compute their **mean of average ratings**, and see what the observed mean lie in this empirical distribution.
+
+Test Statistic: Means of average ratings 
+
+Significance level: 5%, since 5% is strong enough to minimize the rate of rejecting a null hypothesis when it is true compared to 10%, while also allowing for reasonable sensitivity to detect meaningful/necessary relationships compared to 1%. It balances between the 2 other options.
+
+some data
+
+#### Conclusion:
+The chance that the observed mean of average ratings came from the distribution of mean under the null is less than 5%.
+Under the null hypothesis, we rarely see an mean of average ratings this large, therefore, we **reject the null hypothesis that the number of steps in a recipe is NOT related to its average rating** at 5% significance level.
