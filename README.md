@@ -98,9 +98,9 @@ The dataframe below shows aggregated statistics between average rating of a reci
 - It appears that there is no obvious trend between ratings and **the mean and median of number of steps**. However, there is an obvious trend that **most of the recipes are associated with a high average rating**. It also implies that recipes that have high ratings may be our focus of interest. 
 
 
-## Assessment of Missingness
+# Assessment of Missingness
 
-### NMAR Analysis
+## NMAR Analysis
 
 Refer back the cleaned *Recipes* Dataset, there is a possibility that the column "*average_rating*" is not missing at random (NMAR). Why? Think about the following scenarios:
 1. Notice that *Interactions* dataset has one row for each rating and/or comment. Imagine that you have questions regarding a recipe, do you **choose** to rate on the recipe or comment on it to clarify?
@@ -110,8 +110,8 @@ Refer back the cleaned *Recipes* Dataset, there is a possibility that the column
 Overall, Since rating a recipe is completely voluntary and is also subject to many factors such as **users not rating recipes they haven't tried, users choosing not to show their opinion, being kind, or even just that they're too lazy to rate**, they may contribute to the missiness of "*average_rating*". Therefore, it can be NMAR. However, we can obtain data like users' review habits (how often do they rate), their profile data (personality), and the time it takes to rate to make it MAR, since they all determine whether a rating will be missing to some extent!
 
 
-### Missingness Dependency
-#### Target Missing Column: 'description'
+## Missingness Dependency
+### Target Missing Column: 'description'
 
 1. It is not missing by design (MD) because other columns do not provide any information sufficient enough for a recipe to miss detailed descriptions.
 2. It is not MNAR because as we will see, its missingness will depend on other column.
@@ -126,7 +126,7 @@ So we test whether it is MAR or MCAR below:
 
 <iframe src="assets/minutes_description.html" width=1000 height=600 frameBorder=0></iframe>
 
-Since the p-value > 0.05 by a lot, we **fail to reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *average rating* and recipes that do not at 5% significance level. Therefore, we say that **the column *description* is NOT MAR depending on *minutes***.
+Since the p-value = 0.386 > 0.05, we **fail to reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *average rating* and recipes that do not at 5% significance level. Therefore, we say that **the column *description* is NOT MAR depending on *minutes***.
 
 *Note*: If you stuck on here, think about the goal of giving an description: focus on the qualities or characteristics of the dishes, such as the flavors or healthiness, and why is it very **unlikely** for it be related to time spent on making it.
    * *Just in case you don't know:* Regardless of how much time a dish spends, it ALWAYS has some characteristics that one may want to share. Fast-making food can be delicious that the contributor may want to describe, and delicate food can also be delicious!
@@ -140,17 +140,17 @@ Since the p-value > 0.05 by a lot, we **fail to reject** the null hypothesis tha
 
 <iframe src="assets/contributor_description.html" width=1000 height=600 frameBorder=0></iframe>
 
-Since the p-value < 0.01 , we **reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *descriptions* and recipes that do not at 1% significance level. Therefore we say that **the column *description* is MAR depending on *contributor id***.
+Since the p-value = 0.002 < 0.01 , we **reject** the null hypothesis that the distribution of *minutes* is the same for recipes that have missing *descriptions* and recipes that do not at 1% significance level. Therefore we say that **the column *description* is MAR depending on *contributor id***.
 
 *Note*: This is intuitive when you think about the **personality** of different recipe contributors. Some may LOVE giving detailed descriptions while some may be so straight forward that they believe that the descriptions in *steps* or recipe *name* are already sufficient that they don't need any extra add-ons.
 
 
 
-## Hypothesis Testing
+# Hypothesis Testing
 
 Recall the Question of Interest: **whether or not there is a relationship, and what is the relationship, between the number of steps in recipes and their average ratings?** That is, from a broader sense, is it possible that the average ratings for recipes does not only depend on how the food tastes?
 
-### Warm up:
+## Warm up:
 It appears that the recipes with middle/high ranges of number of steps often (not always though) tend to have **slightly higher average rating** than the recipes that have lower ranges of number of steps.
 
 <iframe src="assets/stepsx_mean_ratingsy.html" width=1000 height=600 frameBorder=0></iframe>>
@@ -161,7 +161,7 @@ It appears that the recipes with middle/high ranges of number of steps often (no
 **Alternative Hypothesis**: The number of steps in a recipe **is related** to its average rating.
 - In other words, the randomly chosen 20 recipes are very unlikely to have a mean this high if they are not related.
 
-### Plan:
+## Plan:
 Repeatably sample 20 recipes 100000 times from the population and compute their **mean of average ratings**, and see where the observed mean lies in this empirical distribution.
 
 **Test statistic**: Means of average ratings
@@ -174,6 +174,6 @@ This statistic is ready to use naturally because our observed statistic is a mea
 
 As you can see, the observed mean (4.80) is almost sitting at the margin of the histogram! That means ...  
 
-### Conclusion:
-The chance that the observed mean of average ratings came from the distribution of mean under the null is less than 5%.
+## Conclusion:
+The chance that the observed mean of average ratings came from the distribution of mean under the null is less than 5%, which is consistent with our computed p-value: 0.04923.
 Under the null hypothesis, we rarely see an mean of average ratings this large, therefore, we **reject the null hypothesis that the number of steps in a recipe is NOT related to its average rating** at 5% significance level.
