@@ -1,12 +1,12 @@
 By Vicky Li (<yil164@ucsd.edu>)
 
-## Introduction
+# Introduction
 
-### Question of Focus
+## Question of Focus
 
 Many people naturally assume that a rating for a recipe represents how good the food **really** tastes. However, will the ratings be influenced by other factors, say, the number of steps that are required to make the dish? This project aims to explore whether or not there is a relationship, and what is the relationship, between **the number of steps in a recipe** and **its average ratings**.
 
-### Dataset
+## Dataset
 
 I will use a dataset named *Recipes* to explore the relationships.
 
@@ -18,9 +18,9 @@ Our question is relevant to columns: "*n_steps*" and "*average_rating*".
 - **"*n_steps*"**: the number of steps that are shown in a recipe 
 - **"*average_rating*"**: average rating for a recipe, if any.
 
-## Cleaning and EDA
+# Cleaning and EDA
 
-### Data Cleaning
+## Data Cleaning
 
 - Column "*n_steps*": It has been stored as an integer type in the dataset, and there are no missing values/values that are used to impute missing values. As a result, this column is ready to be utilized efficiently without causing any bias due to missingness!
 
@@ -41,7 +41,7 @@ Cleaned Recipes Dataset:
 
 
 
-### Univariate Analysis
+## Univariate Analysis
 
 <iframe src="assets/step_distribution.html" width=1000 height=600 frameBorder=0></iframe>
 
@@ -61,17 +61,17 @@ Any rating under 3.75 is considered to be an outlier.
 The lower 25% of ratings are found in [1, 4.5], which shows **how rare it is for a rating to be in this already wide range.**
 
 
-### Bivariate Analysis
+## Bivariate Analysis
 
 <iframe src="assets/bi_distribution_box.html" width=1000 height=600 frameBorder=0></iframe>
 
-#### There are a few things to emphasize:
+### There are a few things to emphasize:
 - The distribution is **positively skewed** for most of the ranges of average ratings (if not all).
 - Despite that there are more data points that fall into higher ranges of average ratings while some ranges have only a few data points, the **outlier thresholds for number of steps are similar** (around 21 steps). In fact, the more data points there are within a range, the more similar the threshold will be throughout various ranges
     * Similarly, the **middle 50%** data points are consistent throughout ranges of average ratings that have many data points.
 
 
-### Interesting Aggregates
+## Interesting Aggregates
 
 The dataframe below shows aggregated statistics between average rating of a recipe and the steps it takes. Since average rating is continuous, I group them into several ranges for better analysis.
 
@@ -95,7 +95,7 @@ The dataframe below shows aggregated statistics between average rating of a reci
 | [4.75, 5.0)            |  9.32083 |        8 |   5.69882 |    4557 |
 | 5                      | 10.2251  |        9 |   6.59071 |   47784 |
 
-#### Discovery: 
+### Discovery: 
 - In rating ranges where many data points (recipes) fall in, **the standard deviation (std) tends to be smaller** and is more consistent with other different ranges that both have many data points.
 - It appears that there is no obvious trend between ratings and **the mean and median of number of steps**. However, there is an obvious trend that **most of the recipes are associated with a high average rating**. It also implies that recipes that have high ratings may be our focus of interest. 
 
