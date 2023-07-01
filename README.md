@@ -162,7 +162,7 @@ It appears that the recipes with middle/high ranges of number of steps often (no
 - In other words, the randomly chosen 20 recipes are very unlikely to have a mean this high if they are not related.
 
 ## Plan:
-Repeatably sample 20 recipes 100000 times from the population and compute their **mean of average ratings**, and see where the observed mean lies in this empirical distribution.
+Repeatably sample 20 recipes 100,000 times from the population and compute their **mean of average ratings**, and see where the observed mean lies in this empirical distribution.
 
 **Test statistic**: Means of average ratings
 This statistic is ready to use naturally because our observed statistic is a mean of average ratings, but just in a smaller subset of group. 
