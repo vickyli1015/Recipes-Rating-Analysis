@@ -1,7 +1,6 @@
 By Vicky Li (<yil164@ucsd.edu>)
 
 # Introduction
-
 ## Question of Focus
 
 Many people naturally assume that a rating for a recipe represents how good the food **really** tastes. However, will the ratings be influenced by other factors, say, the number of steps that are required to make the dish? This project aims to explore whether or not there is a relationship, and what is the relationship, between **the number of steps in a recipe** and **its average ratings**.
