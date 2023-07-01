@@ -19,7 +19,6 @@ Our question is relevant to columns: "*n_steps*" and "*average_rating*".
 - **"*average_rating*"**: average rating for a recipe, if any.
 
 # Cleaning and EDA
-
 ## Data Cleaning
 
 - Column "*n_steps*": It has been stored as an integer type in the dataset, and there are no missing values/values that are used to impute missing values. As a result, this column is ready to be utilized efficiently without causing any bias due to missingness!
